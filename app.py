@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, jsonify
 from telegram_bot import TelegramBot
 import pprint
 
@@ -12,8 +12,8 @@ def index():
     req = request.get_json()
     bot = TelegramBot()
     bot.parse_webhook_data(req)
-    is_success = bot.action()
-    return ""
+    bot.action()
+    return jsonify(success=True)
 
 if __name__ == '__main__':
     app.run(port=5000)
